@@ -102,9 +102,13 @@ function beforeDrawing() {
     canvasWrapper.addEventListener('touchstart', function (event) {
 
       flay = true
-
+     console.log('下笔了');
+     console.log(event.touches);
+     
       last[event.touches[0].clientX, event.touches[0].clientY] //收集画板初始触点
-
+      
+      console.log(last);
+      
       if (editEraser) {
 
         ctx.clearRect(last[0], last[1], 10, 10); //怎么擦除
@@ -116,19 +120,14 @@ function beforeDrawing() {
       }
 
     })
-    canvasWrapper.addEventListener('touchend', function (event) {
 
-      flay = false
-      removeEraser()
-
-    })
     canvasWrapper.addEventListener('touchmove', function (event) {
 
-      flay = true
+      if (!flay) return
 
-      let x = event.touches[0].clientX
+      let x = event.touches[0].clientX;
 
-      let y = event.touches[0].clientY
+      let y = event.touches[0].clientY;
       //收集画板初始触点
 
       if (editEraser) {
@@ -136,11 +135,28 @@ function beforeDrawing() {
         ctx.clearRect(x, y, 10, 10); //怎么擦除
 
         eraNode.style.left = x - erX + 'px'
+        
         eraNode.style.top = y - erY + 'px'
+
       } else {
-        beginDraw(last[0], last[1], x, y)
+        //让画笔的起点为上一个事件的坐标
+        beginDraw(last[0], last[1], x, y)  
+       
         last = [x, y]
+
+        console.log(x,y);
+        
       }
+
+    })
+
+    canvasWrapper.addEventListener('touchend', function (event) {
+
+      flay = false
+
+      removeEraser()
+
+      // last=[]
 
     })
 
@@ -220,9 +236,9 @@ function createEraser() {
 
 function removeEraser() {
 
-  canvasWrapper.removeChild(eraNode);
+  if (!eraNode) return
 
-  console.log(eraNode);
+  canvasWrapper.removeChild(eraNode);
 
   eraNode = false
 
@@ -248,9 +264,13 @@ function beginDraw(x1, y1, x, y) {
   ctx.beginPath();
 
   ctx.moveTo(x1, y1);
+
   ctx.lineWidth = lineWidth
-  ctx.lineTo(x, y);
+
   ctx.lineCap = 'round'
+  ctx.lineTo(x, y);
+
   ctx.stroke();
+
   ctx.closePath()
 }
