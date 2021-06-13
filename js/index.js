@@ -102,12 +102,10 @@ function beforeDrawing() {
     canvasWrapper.addEventListener('touchstart', function (event) {
 
       flay = true
-     console.log('下笔了');
-     console.log(event.touches);
      
-      last[event.touches[0].clientX, event.touches[0].clientY] //收集画板初始触点
+      last=[event.touches[0].clientX, event.touches[0].clientY] //收集画板初始触点
       
-      console.log(last);
+    
       
       if (editEraser) {
 
@@ -140,11 +138,12 @@ function beforeDrawing() {
 
       } else {
         //让画笔的起点为上一个事件的坐标
+
         beginDraw(last[0], last[1], x, y)  
        
         last = [x, y]
 
-        console.log(x,y);
+       
         
       }
 
@@ -156,7 +155,7 @@ function beforeDrawing() {
 
       removeEraser()
 
-      // last=[]
+      
 
     })
 
@@ -217,10 +216,9 @@ function beforeDrawing() {
 
 beforeDrawing()
 
-
 autoRsizeWin()
 
-
+//添加橡皮擦
 function createEraser() {
 
   if (eraNode) return
@@ -233,7 +231,7 @@ function createEraser() {
 
   canvasWrapper.appendChild(eraNode)
 }
-
+//删除橡皮擦
 function removeEraser() {
 
   if (!eraNode) return
@@ -255,6 +253,7 @@ function autoRsizeWin() {
   function setWin() {
 
     canvas.width = document.documentElement.clientWidth
+
     canvas.height = document.documentElement.clientHeight
   }
 }
@@ -267,7 +266,8 @@ function beginDraw(x1, y1, x, y) {
 
   ctx.lineWidth = lineWidth
 
-  ctx.lineCap = 'round'
+  ctx.lineCap = 'round';
+
   ctx.lineTo(x, y);
 
   ctx.stroke();
