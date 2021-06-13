@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+ 
+}
+.canvasWrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  /*  background-color: red;
+  z-index: 99; */
+}
+.canvasWrapper canvas {
+  display: block;
+  background: white;
+}
+.actions {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.actions div {
+  margin: 0px 12.5px;
+  font-size: 24px;
+  transition: all 0.2s;
+}
+.actions div.active {
+  color: red;
+  font-size: 28px;
+  
+}
+
+.colour {
+  position: fixed;
+  top: 60px;
+  left: 28px;
+}
+
+.colour li {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  box-shadow: 0 0 3px rgb(0 0 0 / 25%);
+  margin: 10px 0;
+  transition: all 0.3s;
+}
+
+.colour li.active {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.95);
+  transform: scale(1.2);
+}
+
+.colour li#blue {
+  background-color: blue;
+}
+.colour li#green {
+  background-color: green;
+}
+.colour li#red {
+  background-color: red;
+}
+
+ol.size {
+  position: fixed;
+  right: 20px;
+  top: 10px;
+}
+
+.size #big {
+  width: 20px;
+  height: 0px;
+  padding: 15px 0;
+  border-bottom: 3px solid #000;
+}
+.size #small {
+  width: 20px;
+  height: 0px;
+  padding: 15px 0;
+  border-bottom: 10px solid #000;
+}
+
+.eraser{
+font-size: 24px;
+position: absolute;bottom: 0;
+/* display: none; */
+
+}
